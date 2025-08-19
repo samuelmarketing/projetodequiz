@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Marketing Digital</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .quiz {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .quiz.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .final-message {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .final-message.active {
+            display: block;
+            opacity: 1;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+
+        .option-button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sua Jornada no Marketing Digital com IA Começa Aqui!</h1>
+
+        <div id="quiz-1" class="quiz active">
+            <h2>Quer ganhar dinheiro com marketing?</h2>
+            <div class="options-container">
+                <button class="option-button" onclick="proximaPergunta(1, 'Sim')">Sim</button>
+                <button class="option-button" onclick="proximaPergunta(1, 'Não')">Não</button>
+            </div>
+        </div>
+
+        <div id="quiz-2" class="quiz">
+            <h2>Tá disposto a se dedicar pra conseguir?</h2>
+            <div class="options-container">
+                <button class="option-button" onclick="proximaPergunta(2, 'Sim')">Sim</button>
+                <button class="option-button" onclick="proximaPergunta(2, 'Não')">Não</button>
+            </div>
+        </div>
+
+        <div id="quiz-3" class="quiz">
+            <h2>Acredita realmente nesse mercado?</h2>
+            <div class="options-container">
+                <button class="option-button" onclick="proximaPergunta(3, 'Sim')">Sim</button>
+                <button class="option-button" onclick="proximaPergunta(3, 'Não')">Não</button>
+            </div>
+        </div>
+
+        <div id="quiz-4" class="quiz">
+            <h2>Então vamos comigo juntos.</h2>
+            <div class="options-container">
+                <button class="option-button" onclick="proximaPergunta(4, 'Vamos')">Vamos</button>
+                <button class="option-button" onclick="proximaPergunta(4, 'Com certeza')">Com certeza</button>
+            </div>
+        </div>
+
+        <div id="quiz-5" class="quiz">
+            <h2>Quer ganhar de 5 a 10k por mês só com IA?</h2>
+            <div class="options-container">
+                <button class="option-button" onclick="showFinalMessage()">Sim</button>
+                <button class="option-button" onclick="showFinalMessage()">Não</button>
+            </div>
+        </div>
+
+        <div id="final-message" class="final-message">
+            <h2 style="color: #28a745; font-weight: bold;">Parabéns! Sua jornada começa agora.</h2>
+            <p>Sua dedicação é o primeiro passo para o sucesso.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function proximaPergunta(numeroDoQuiz, resposta) {
+            const quizAtualDiv = document.getElementById(`quiz-${numeroDoQuiz}`);
+            quizAtualDiv.classList.remove('active');
+
+            setTimeout(() => {
+                if (numeroDoQuiz < 5) {
+                    const proximoQuizDiv = document.getElementById(`quiz-${numeroDoQuiz + 1}`);
+                    proximoQuizDiv.classList.add('active');
+                }
+            }, 500);
+        }
+
+        function showFinalMessage() {
+            const quizAtualDiv = document.getElementById('quiz-5');
+            quizAtualDiv.classList.remove('active');
+
+            setTimeout(() => {
+                const finalMessageDiv = document.getElementById('final-message');
+                finalMessageDiv.classList.add('active');
+                confetes();
+            }, 500);
+        }
+
+        function confetes() {
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+</html>
